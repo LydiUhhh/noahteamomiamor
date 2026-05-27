@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Un Lugar Especial</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --rosa:#d98c9c;
+    --rosa-claro:#f7e7ea;
+    --rosa-oscuro:#b76e79;
+    --crema:#fffaf8;
+    --texto:#4b3e42;
+    --sombra:0 10px 30px rgba(0,0,0,0.08);
+}
+
+body{
+    background:
+    radial-gradient(circle at top left,#ffe6ec,transparent 30%),
+    radial-gradient(circle at bottom right,#ffdbe4,transparent 30%),
+    linear-gradient(135deg,#fff8f9,#fff0f3);
+    min-height:100vh;
+    overflow-x:hidden;
+    font-family:'Montserrat',sans-serif;
+    color:var(--texto);
+}
+
+/* FONDO */
+
+.blur{
+    position:fixed;
+    width:400px;
+    height:400px;
+    border-radius:50%;
+    filter:blur(90px);
+    opacity:.3;
+    z-index:-1;
+}
+
+.blur1{
+    background:#ffc1cc;
+    top:-100px;
+    left:-100px;
+}
+
+.blur2{
+    background:#ffd6de;
+    bottom:-120px;
+    right:-120px;
+}
+
+/* SECCIONES */
+
+section{
+    min-height:100vh;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    padding:40px 20px;
+}
+
+.active{
+    display:flex;
+}
+
+.main-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:5.5rem;
+    font-weight:600;
+    color:var(--rosa-oscuro);
+    letter-spacing:2px;
+    margin-bottom:10px;
+    text-align:center;
+}
+
+.subtitle{
+    max-width:700px;
+    text-align:center;
+    line-height:1.9;
+    color:#6e5d61;
+    font-size:1.05rem;
+    margin-bottom:40px;
+}
+
+button{
+    border:none;
+    background:white;
+    padding:16px 34px;
+    border-radius:50px;
+    cursor:pointer;
+    color:var(--rosa-oscuro);
+    font-size:0.95rem;
+    font-weight:500;
+    transition:.35s;
+    box-shadow:var(--sombra);
+    border:1px solid rgba(183,110,121,.15);
+}
+
+button:hover{
+    transform:translateY(-4px);
+    background:var(--rosa);
+    color:white;
+}
+
+.menu{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:22px;
+    width:100%;
+    max-width:950px;
+    margin-top:30px;
+}
+
+.menu-card{
+    background:rgba(255,255,255,.75);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:30px;
+    padding:35px;
+    text-align:center;
+    transition:.4s;
+    box-shadow:var(--sombra);
+}
+
+.menu-card:hover{
+    transform:translateY(-8px);
+}
+
+.menu-card h3{
+    margin:15px 0;
+    font-family:'Cormorant Garamond',serif;
+    font-size:2rem;
+    color:var(--rosa-oscuro);
+}
+
+.menu-card p{
+    font-size:.95rem;
+    line-height:1.7;
+    color:#6b5d60;
+}
+
+.icon{
+    font-size:2.5rem;
+}
+
+.letter-container{
+    width:100%;
+    max-width:1050px;
+    position:relative;
+}
+
+.letter{
+    background:rgba(255,255,255,.92);
+    border-radius:35px;
+    padding:80px;
+    box-shadow:
+    0 20px 60px rgba(0,0,0,.08),
+    inset 0 0 0 1px rgba(183,110,121,.08);
+    position:relative;
+    overflow:hidden;
+}
+
+.letter::before{
+    content:"";
+    position:absolute;
+    inset:18px;
+    border:1px solid rgba(183,110,121,.15);
+    border-radius:25px;
+    pointer-events:none;
+}
+
+.letter h2{
+    font-family:'Cormorant Garamond',serif;
+    font-size:4.5rem;
+    color:var(--rosa-oscuro);
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.letter p{
+    font-size:1.05rem;
+    line-height:2.1;
+    margin-bottom:25px;
+    color:#5f5054;
+}
+
+.corner{
+    position:absolute;
+    width:140px;
+    opacity:.18;
+}
+
+.corner1{
+    top:-10px;
+    left:-10px;
+    transform:rotate(-15deg);
+}
+
+.corner2{
+    top:-10px;
+    right:-10px;
+    transform:rotate(15deg);
+}
+
+.corner3{
+    bottom:-10px;
+    left:-10px;
+    transform:rotate(10deg);
+}
+
+.corner4{
+    bottom:-10px;
+    right:-10px;
+    transform:rotate(-10deg);
+}
+
+/* NUEVAS FOTOS */
+
+.floating-photo{
+    position:absolute;
+    width:180px;
+    border-radius:22px;
+    box-shadow:0 12px 30px rgba(0,0,0,.12);
+    transition:.4s;
+    z-index:2;
+}
+
+.floating-photo:hover{
+    transform:scale(1.05) rotate(0deg);
+}
+
+.photo1{
+    top:80px;
+    left:-90px;
+    transform:rotate(-8deg);
+}
+
+.photo2{
+    top:420px;
+    right:-90px;
+    transform:rotate(8deg);
+}
+
+.photo3{
+    bottom:120px;
+    left:-80px;
+    transform:rotate(-6deg);
+}
+
+.media-box{
+    width:100%;
+    max-width:1000px;
+    background:rgba(255,255,255,.75);
+    border-radius:35px;
+    padding:40px;
+    backdrop-filter:blur(10px);
+    box-shadow:var(--sombra);
+}
+
+.media-box h2{
+    font-family:'Cormorant Garamond',serif;
+    font-size:3.5rem;
+    color:var(--rosa-oscuro);
+    text-align:center;
+    margin-bottom:10px;
+}
+
+.media-box p{
+    text-align:center;
+    margin-bottom:30px;
+    color:#6e5d61;
+}
+
+video{
+    width:100%;
+    border-radius:25px;
+    margin-top:25px;
+}
+
+audio{
+    width:100%;
+}
+
+.gallery{
+    width:100%;
+    max-width:1100px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:25px;
+}
+
+.gallery img{
+    width:100%;
+    height:340px;
+    object-fit:cover;
+    border-radius:28px;
+    transition:.4s;
+    box-shadow:var(--sombra);
+}
+
+.gallery img:hover{
+    transform:translateY(-6px);
+}
+
+.quote-box{
+    background:rgba(255,255,255,.78);
+    backdrop-filter:blur(12px);
+    padding:70px;
+    border-radius:35px;
+    max-width:850px;
+    text-align:center;
+    box-shadow:var(--sombra);
+}
+
+.quote{
+    font-family:'Cormorant Garamond',serif;
+    font-size:3rem;
+    line-height:1.7;
+    color:var(--rosa-oscuro);
+}
+
+.back{
+    margin-top:35px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    .main-title{
+        font-size:3.8rem;
+    }
+
+    .letter{
+        padding:45px 28px;
+    }
+
+    .letter h2{
+        font-size:3rem;
+    }
+
+    .quote{
+        font-size:2rem;
+    }
+
+    .quote-box{
+        padding:40px 25px;
+    }
+
+    .corner{
+        width:90px;
+    }
+
+    .floating-photo{
+        width:110px;
+    }
+
+    .photo1{
+        left:-30px;
+    }
+
+    .photo2{
+        right:-30px;
+    }
+
+    .photo3{
+        left:-20px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="blur blur1"></div>
+<div class="blur blur2"></div>
+
+<!-- INICIO -->
+
+<section id="inicio" class="active">
+
+    <h1 class="main-title">Con amor para Noah :P</h1>
+
+    <p class="subtitle">
+        Una pequeña pagina de detallitos y cosas que me gustan y recuerdan a ti
+    </p>
+
+    <button onclick="showPage('menu')">
+        Entrar
+    </button>
+
+</section>
+
+<!-- MENU -->
+
+<section id="menu">
+
+    <h1 class="main-title">Menu</h1>
+
+    <div class="menu">
+
+        <div class="menu-card">
+            <div class="icon">🎵</div>
+            <h3>Mente</h3>
+            <p>
+                Lo que pasa por mi mente cada que te pienso
+            </p>
+            <br>
+            <button onclick="showPage('media')">
+                Abrir
+            </button>
+        </div>
+
+        <div class="menu-card">
+            <div class="icon">💌</div>
+            <h3>Carta</h3>
+            <p>
+                Algunas palabras que expresan mis sentimientos por ti
+            </p>
+            <br>
+            <button onclick="showPage('letter')">
+                Leer
+            </button>
+        </div>
+
+        <div class="menu-card">
+            <div class="icon">📸</div>
+            <h3>Galería</h3>
+            <p>
+                Cositas que me recuerdan a ti
+            </p>
+            <br>
+            <button onclick="showPage('gallery')">
+                Ver
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- VIDEO -->
+
+<section id="media">
+
+<div class="media-box">
+
+    <h2>Nosotros</h2>
+
+    <p>
+        Aqui tienes una cancion que me hace pensar en ti cada vez que la escucho junto a los personajes en los que nos veo
+    </p>
+
+    <audio controls>
+        <source src="videoplayback.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const audio = document.querySelector("audio");
+        audio.volume = 0.2;
+    });
+    </script>
+
+    <video controls autoplay muted loop>
+        <source src="hachimomo.mp4" type="video/mp4">
+    </video>
+
+</div>
+
+<button class="back" onclick="showPage('menu')">
+    Volver
+</button>
+
+</section>
+
+<!-- CARTA -->
+
+<section id="letter">
+
+<div class="letter-container">
+
+<img class="floating-photo photo1"
+src="pompom.png">
+
+<img class="floating-photo photo2"
+src="pamache.png">
+
+
+<div class="letter">
+
+    <img class="corner corner1" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png">
+    <img class="corner corner2" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png">
+    <img class="corner corner3" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png">
+    <img class="corner corner4" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png">
+
+    <h2>Para Ti</h2>
+
+    <p>
+    Es raro como en tan poco tiempo alguien puede aparecer<br>
+    y aun así convertirse tan rapido<br>
+    en una parte esencial de mi dia a dia<br>
+    </p>
+
+    <p>
+    Contigo todo se siente muy natural,<br>
+    como si hablar contigo fuera algo<br>
+    que necesitaba desde hace tiempo<br>
+    sin siquiera saberlo<br>
+    </p>
+
+    <p>
+    Ahora hay canciones,<br>
+    momentos y hasta pequeños detalles<br>
+    que automáticamente me recuerdan a ti<br>
+    Y sinceramente,<br>
+    me gusta mucho eso.<br>
+    </p>
+
+    <p>
+    Porque aunque todavía nos quede muchísimo por vivir,<br>
+    siento que ya dejaste una huella bonita en mí.<br>
+    </p>
+
+
+    <p style="text-align:center; margin-top:40px; color:var(--rosa-oscuro); font-size:1.2rem;">
+        Gracias por existir y ser tu misma a mi lado <3
+    </p>
+
+</div>
+
+</div>
+
+<button class="back" onclick="showPage('menu')">
+    Volver
+</button>
+
+</section>
+
+<!-- GALERIA -->
+
+<section id="gallery">
+
+<h1 class="main-title">Galeria</h1>
+
+<div class="gallery">
+
+<img src="foto1.jpeg">
+<img src="foto2.jpeg">
+<img src="foto3.jpeg">
+<img src="foto4.jpeg">
+<img src="foto5.jpeg">
+<img src="foto6.jpeg">
+
+</div>
+
+<button class="back" onclick="showPage('menu')">
+    Volver
+</button>
+
+</section>
+
+<script>
+
+function showPage(id){
+
+    document.querySelectorAll("section").forEach(section=>{
+        section.classList.remove("active");
+    });
+
+    document.getElementById(id).classList.add("active");
+}
+
+</script>
+
+</body>
+</html>
